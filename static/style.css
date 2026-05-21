@@ -1,0 +1,496 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#050816;
+
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.auth-container{
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.glass-card{
+
+    width:350px;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 0 40px rgba(0,255,255,0.2);
+
+    text-align:center;
+
+    animation:float 3s infinite ease-in-out;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+h1{
+    color:#00ffff;
+
+    margin-bottom:10px;
+
+    font-size:40px;
+}
+
+p{
+    color:white;
+
+    margin-bottom:30px;
+}
+
+input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,0.1);
+
+    color:white;
+}
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#00ffff;
+
+    color:black;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+a{
+
+    display:block;
+
+    margin-top:20px;
+
+    color:#00ffff;
+
+    text-decoration:none;
+}
+
+.flash{
+
+    background:red;
+
+    padding:10px;
+
+    margin-bottom:15px;
+
+    border-radius:10px;
+
+    color:white;
+}
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-body{
+
+    background:#050816;
+
+    min-height:100vh;
+
+    padding:30px;
+}
+
+.dashboard-container{
+
+    width:100%;
+}
+
+.top-bar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+}
+
+.top-bar h1{
+
+    color:#00ffff;
+}
+
+.user-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    color:white;
+}
+
+.generate-box{
+
+    margin-bottom:40px;
+}
+
+.generate-box form{
+
+    display:flex;
+
+    gap:10px;
+}
+
+.generate-box input{
+
+    flex:1;
+}
+
+/* =========================
+   MODERN GALLERY
+========================= */
+
+.gallery{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit, minmax(320px,1fr));
+
+    gap:30px;
+
+    margin-top:30px;
+}
+
+/* IMAGE CARD */
+
+.image-card{
+
+    background:
+    rgba(255,255,255,0.08);
+
+    padding:15px;
+
+    border-radius:25px;
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+    0 0 20px rgba(0,255,255,0.15);
+
+    transition:0.4s;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.image-card:hover{
+
+    transform:
+    translateY(-10px)
+    scale(1.02);
+
+    box-shadow:
+    0 0 40px rgba(0,255,255,0.35);
+}
+
+/* IMAGE */
+
+.generated-image{
+
+    width:100%;
+
+    border-radius:20px;
+
+    transition:0.4s;
+}
+
+.generated-image:hover{
+
+    transform:scale(1.03);
+}
+
+/* PROMPT BOX */
+
+.prompt-box{
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border-radius:15px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    color:white;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    word-wrap:break-word;
+}
+
+/* BUTTON GROUP */
+
+.button-group{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+/* DOWNLOAD BUTTON */
+
+.download-btn{
+
+    flex:1;
+
+    text-align:center;
+
+    padding:12px;
+
+    background:#00e5ff;
+
+    color:black;
+
+    text-decoration:none;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.download-btn:hover{
+
+    transform:scale(1.05);
+
+    background:#00bcd4;
+}
+
+/* DELETE BUTTON */
+
+.delete-btn{
+
+    flex:1;
+
+    text-align:center;
+
+    padding:12px;
+
+    background:#ff1744;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.delete-btn:hover{
+
+    transform:scale(1.05);
+
+    background:#d50000;
+}
+
+/* =========================
+   DARK LIGHT MODE
+========================= */
+
+.light-mode{
+
+    background:#f5f5f5 !important;
+
+    color:black !important;
+}
+
+.light-mode .image-card{
+
+    background:white;
+
+    box-shadow:0 0 20px rgba(100, 236, 240, 0.1);
+}
+
+.light-mode .prompt-box{
+
+    background:#f1f1f1;
+
+    color:black;
+}
+
+.light-mode .top-bar h1{
+
+    color:#111;
+}
+
+.light-mode .user-info{
+
+    color:black;
+}
+
+.light-mode input{
+
+    background:#ffffff;
+
+    color:black;
+
+    border:1px solid #ddd;
+}
+
+.light-mode .glass-card{
+
+    background:white;
+
+    color:black;
+}
+
+/* TOGGLE BUTTON */
+
+.theme-btn{
+
+    padding:10px 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#00e5ff;
+
+    color:black;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.theme-btn:hover{
+
+    transform:scale(1.05);
+}
+
+.image-card{
+
+    background:rgba(255,255,255,0.08);
+
+    padding:15px;
+
+    border-radius:20px;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 0 20px rgba(0,255,255,0.2);
+}
+
+.image-card img{
+
+    width:100%;
+
+    border-radius:15px;
+}
+
+.image-card p{
+
+    margin-top:10px;
+
+    color:white;
+}
+.download-btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 20px;
+    background:#00e5ff;
+    color:#000;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.download-btn:hover{
+    transform:scale(1.05);
+    background:#00bcd4;
+}
+.delete-btn{
+    display:inline-block;
+    margin-top:10px;
+    margin-left:10px;
+    padding:10px 20px;
+    background:#ff1744;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.delete-btn:hover{
+    transform:scale(1.05);
+    background:#d50000;
+}

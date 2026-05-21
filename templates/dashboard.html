@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>X10THINK Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+
+        <h1>X10THINK</h1>
+
+        <div class="user-info">
+
+            <span>
+                Points: {{ user.points }}
+            </span>
+
+            <!-- THEME BUTTON -->
+            <button
+                onclick="toggleTheme()"
+                class="theme-btn"
+            >
+                Toggle Mode
+            </button>
+
+            <!-- LOGOUT -->
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- GENERATE BOX -->
+    <div class="generate-box">
+
+        <form action="/generate"
+              method="POST">
+
+            <input type="text"
+                   name="prompt"
+                   placeholder="Enter AI image prompt..."
+                   required>
+
+            <button type="submit">
+                GENERATE IMAGE
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- GALLERY -->
+    <div class="gallery">
+
+        {% for image in user_images %}
+
+        <div class="image-card">
+
+            <!-- IMAGE -->
+            <img
+                src="data:image/png;base64,{{ image.image_data }}"
+                class="generated-image"
+            >
+
+            <!-- PROMPT -->
+            <div class="prompt-box">
+                {{ image.prompt }}
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="button-group">
+
+                <!-- DOWNLOAD -->
+                <a
+                    href="data:image/png;base64,{{ image.image_data }}"
+                    download="x10think-image.png"
+                    class="download-btn"
+                >
+                    Download
+                </a>
+
+                <!-- DELETE -->
+                <a
+                    href="/delete-image/{{ image.id }}"
+                    class="delete-btn"
+                >
+                    Delete
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- =========================
+         AI CHATBOT
+    ========================= -->
+
+    <div class="chat-container">
+
+        <h2>AI Chatbot</h2>
+
+        <div class="chat-box" id="chat-box">
+
+            <div class="bot-message">
+                Hello 👋 Ask me anything...
+            </div>
+
+        </div>
+
+        <div class="chat-input-area">
+
+            <input
+                type="text"
+                id="user-input"
+                placeholder="Type your message..."
+            >
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "light-mode"
+    );
+
+}
+
+async function sendMessage(){
+
+    const input = document.getElementById(
+        "user-input"
+    );
+
+    const chatBox = document.getElementById(
+        "chat-box"
+    );
+
+    const message = input.value;
+
+    if(message.trim() === ""){
+        return;
+    }
+
+    // USER MESSAGE
+    chatBox.innerHTML += `
+        <div class="user-message">
+            ${message}
+        </div>
+    `;
+
+    input.value = "";
+
+    // SEND TO FLASK
+    const response = await fetch('/chat', {
+
+        method:'POST',
+
+        headers:{
+            'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+            message:message
+        })
+
+    });
+
+    const data = await response.json();
+
+    // BOT MESSAGE
+    chatBox.innerHTML += `
+        <div class="bot-message">
+            ${data.reply}
+        </div>
+    `;
+
+    // AUTO SCROLL
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+</script>
+
+</body>
+</html>

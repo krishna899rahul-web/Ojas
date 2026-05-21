@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <div class="top-bar">
+
+        <h1>ADMIN PANEL</h1>
+
+        <div class="user-info">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- CREATE CODE -->
+
+    <div class="generate-box">
+
+        <form method="POST">
+
+            <input
+                type="number"
+                name="points"
+                placeholder="Enter Points"
+                required
+            >
+
+            <button type="submit">
+                CREATE RECHARGE CODE
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- RECHARGE CODES -->
+
+    <div class="image-card">
+
+        <h2 style="color:white; margin-bottom:20px;">
+            Recharge Codes
+        </h2>
+
+        {% for code in codes %}
+
+        <div class="prompt-box">
+
+            <b>Code:</b> {{ code.code }}
+            <br><br>
+
+            <b>Points:</b> {{ code.point_value }}
+            <br><br>
+
+            <b>Used:</b> {{ code.is_used }}
+
+        </div>
+
+        <br>
+
+        {% endfor %}
+
+    </div>
+
+    <br><br>
+
+    <!-- USERS -->
+
+    <div class="image-card">
+
+        <h2 style="color:white; margin-bottom:20px;">
+            Users
+        </h2>
+
+        {% for user in users %}
+
+        <div class="prompt-box">
+
+            <b>Username:</b> {{ user.username }}
+            <br><br>
+
+            <b>Points:</b> {{ user.points }}
+            <br><br>
+
+            <b>Admin:</b> {{ user.is_admin }}
+
+        </div>
+
+        <br>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
