@@ -4,3 +4,4 @@ werkzeug
 pillow
 python-dotenv
 google-genai
+gunicorn
